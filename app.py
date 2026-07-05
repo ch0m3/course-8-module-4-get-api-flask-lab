@@ -21,8 +21,8 @@ def home():
 def get_products():
     category = request.args.get("category")
     if category:
-        products = [product for product in products if product["category"]== category]
-        return jsonify(products)
+        filtered = [p for p in products if p["category"].lower() == category.lower()]
+        return jsonify(filtered)
     return jsonify(products)
 
 
