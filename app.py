@@ -3,18 +3,22 @@ from data import products
 
 app = Flask(__name__)
 
+products = [
+    {"id": 1, "name": "Laptop", "category": "electronics"},
+    {"id": 2, "name": "Book", "category": "books"},
+    {"id": 3, "name": "Notebook", "category": "books"},
+]
 
 # TODO: Implement homepage route that returns a welcome message
 @app.route("/")
 def home():
-    return jsonify({"Message":"Welcome to the Gulag"}) # TODO: Return a welcome message
+    return jsonify({"message":"Welcome to the Gulag"}) # TODO: Return a welcome message
 
 
 
 # TODO: Implement GET /products route that returns all products or filters by category
 @app.route("/products")
 def get_products():
-    pass  # TODO: Return all products or filter by ?category=
     category = request.args.get("category")
     if category:
         products = [product for product in products if product["category"]== category]
@@ -31,7 +35,7 @@ def get_product_by_id(id):
             product = p
             break
         
-    pass  # TODO: Return product by ID or 404
+    
     if product:
         return jsonify(product)
     else:
